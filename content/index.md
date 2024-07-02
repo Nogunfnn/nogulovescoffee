@@ -2,6 +2,10 @@
 title: NOGULOVESCOFFEE
 draft: false
 tags:
-  - "#projectnlc"
+  - brewing
+  - espresso
+  - branding
+cssclasses: 
+excalidraw-plugin: 
+aliases:
 ---
- 

@@ -2,10 +2,12 @@
 title: NOGULOVESCOFFEE
 draft: false
 tags:
-  - brewing
-  - espresso
+  - coffee
   - branding
 cssclasses: 
 excalidraw-plugin: 
 aliases:
 ---
+
+
+

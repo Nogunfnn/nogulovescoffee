@@ -10,11 +10,11 @@ aliases:
 ---
 
 ---
-[[Espresso Guide]]
-[[Brewing Recipe Design]]
-[[TDS, 수율]]
-
+- [[Espresso Guide]]
+- [[Brewing Recipe Design]]
+- [[TDS, 수율]]
 ---
+
 
 
 

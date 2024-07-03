@@ -1,4 +1,5 @@
-#coffee 
+
+#coffee #brewing #espresso 
 
 - **수율** - 커피 성분이 얼마나 쓰였냐
 

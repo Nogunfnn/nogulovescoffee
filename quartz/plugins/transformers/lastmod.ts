@@ -5,7 +5,7 @@ import { QuartzTransformerPlugin } from "../types"
 import chalk from "chalk"
 
 export interface Options {
-  priority: ("frontmatter" | "git" | "filesystem")[]
+  priority: ()[]
 }
 
 const defaultOptions: Options = {

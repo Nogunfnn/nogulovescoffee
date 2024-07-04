@@ -4,9 +4,7 @@ draft: false
 tags:
   - coffee
   - branding
-cssclasses: 
-excalidraw-plugin: 
-aliases:
+  - essay
 ---
 
 ---

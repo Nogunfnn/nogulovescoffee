@@ -5,11 +5,13 @@ import { QuartzTransformerPlugin } from "../types"
 import chalk from "chalk"
 
 export interface Options {
-  priority: ("frontmatter", "git", "filesystem")[]
+  priority: ("frontmatter" | "git" | "filesystem")[]
+  enableDates: boolean // 날짜 정보 사용 여부를 결정하는 옵션 추가
 }
 
 const defaultOptions: Options = {
   priority: ["frontmatter", "git", "filesystem"],
+  enableDates: false, // 기본값은 날짜 정보를 사용하도록 설정
 }
 
 function coerceDate(fp: string, d: any): Date {
@@ -38,6 +40,11 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
         () => {
           let repo: Repository | undefined = undefined
           return async (_tree, file) => {
+            if (!opts.enableDates) {
+              // 날짜 정보 사용이 비활성화된 경우 아무 작업도 수행하지 않음
+              return;
+            }
+
             let created: MaybeDate = undefined
             let modified: MaybeDate = undefined
             let published: MaybeDate = undefined

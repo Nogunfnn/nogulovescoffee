@@ -1,5 +1,7 @@
+// quartz/cfg.ts (또는 레이아웃 관련 설정 파일)
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import FolderContent from "./quartz/components/FolderContent" // 폴더 리스트 컴포넌트를 가져옵니다.
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -35,9 +37,14 @@ export const defaultContentPageLayout: PageLayout = {
   ],
 }
 
-// components for pages that display lists of pages  (e.g. tags or folders)
+// components for pages that display lists of pages (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    FolderContent({ showFolderCount: true }), // 폴더 리스트를 페이지 상단에 고정
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ContentMeta(),
+  ],
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),

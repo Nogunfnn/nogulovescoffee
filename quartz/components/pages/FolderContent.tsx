@@ -1,4 +1,4 @@
-// quartz/components/FolderContent.tsx (기존 파일 경로를 유지하세요)
+// quartz/components/FolderContent.tsx
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 import path from "path"
 
@@ -20,10 +20,12 @@ const defaultOptions: FolderContentOptions = {
   showFolderCount: true,
 }
 
-export default ((opts?: Partial<FolderContentOptions>) => {
+const FolderContent: QuartzComponent = ((opts?: Partial<FolderContentOptions>) => {
   const options: FolderContentOptions = { ...defaultOptions, ...opts }
 
-  const FolderContent: QuartzComponent = (props: QuartzComponentProps) => {
+  return (props: QuartzComponentProps) => {
+    console.log("Rendering FolderContent with props:", props) // 디버깅 로그 추가
+
     const { tree, fileData, allFiles, cfg } = props
     const folderSlug = stripSlashes(simplifySlug(fileData.slug!))
     const allPagesInFolder = allFiles.filter((file) => {
@@ -34,6 +36,8 @@ export default ((opts?: Partial<FolderContentOptions>) => {
       const isDirectChild = fileParts.length === folderParts.length + 1
       return prefixed && isDirectChild
     })
+    console.log("Pages in folder:", allPagesInFolder) // 디버깅 로그 추가
+
     const cssClasses: string[] = fileData.frontmatter?.cssclasses ?? []
     const classes = ["popover-hint", ...cssClasses].join(" ")
     const listProps = {
@@ -47,9 +51,9 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         : htmlToJsx(fileData.filePath!, tree)
 
     return (
-      <div class={classes}>
+      <div className={classes}>
         <article>{content}</article>
-        <div class="page-listing">
+        <div className="page-listing">
           {options.showFolderCount && (
             <p>
               {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
@@ -64,7 +68,4 @@ export default ((opts?: Partial<FolderContentOptions>) => {
       </div>
     )
   }
-
-  FolderContent.css = style + PageList.css
-  return FolderContent
 }) satisfies QuartzComponentConstructor

@@ -5,14 +5,14 @@ tags:
   - coffee
   - branding
   - essay
+date:
 ---
 
 ---
-- [[Espresso Guide]]
-- [[Brewing Recipe Design]]
-- [[TDS, 수율]]
+- [[branding]]
+- [[coffee]]
+- [[essay]]
 ---
-
 
 
 

@@ -1,4 +1,3 @@
-// quartz/cfg.ts (또는 레이아웃 관련 설정 파일)
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import FolderContent from "./quartz/components/pages/FolderContent" // 폴더 리스트 컴포넌트를 가져옵니다.
@@ -11,7 +10,7 @@ export const sharedPageComponents: SharedLayout = {
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
       "Discord Community": "https://discord.gg/cRFFHYye7t",
-    },
+    }),
   }),
 }
 

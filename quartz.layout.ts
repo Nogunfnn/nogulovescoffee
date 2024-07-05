@@ -16,6 +16,7 @@ export const sharedPageComponents: SharedLayout = {
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
+    Component.FolderList(), // 폴더 리스트를 페이지 상단에 고정
     Component.Breadcrumbs(),
     Component.ArticleTitle(),
     Component.ContentMeta(),

@@ -1,4 +1,3 @@
-// quartz/components/FolderContent.tsx
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 import path from "path"
 
@@ -20,7 +19,7 @@ const defaultOptions: FolderContentOptions = {
   showFolderCount: true,
 }
 
-const FolderContent: QuartzComponent = ((opts?: Partial<FolderContentOptions>) => {
+const FolderContent: QuartzComponentConstructor = ((opts?: Partial<FolderContentOptions>) => {
   const options: FolderContentOptions = { ...defaultOptions, ...opts }
 
   return (props: QuartzComponentProps) => {
@@ -28,8 +27,11 @@ const FolderContent: QuartzComponent = ((opts?: Partial<FolderContentOptions>) =
 
     const { tree, fileData, allFiles, cfg } = props
     const folderSlug = stripSlashes(simplifySlug(fileData.slug!))
+    console.log("Folder slug:", folderSlug) // 디버깅 로그 추가
+
     const allPagesInFolder = allFiles.filter((file) => {
       const fileSlug = stripSlashes(simplifySlug(file.slug!))
+      console.log("Checking file slug:", fileSlug) // 디버깅 로그 추가
       const prefixed = fileSlug.startsWith(folderSlug) && fileSlug !== folderSlug
       const folderParts = folderSlug.split(path.posix.sep)
       const fileParts = fileSlug.split(path.posix.sep)
@@ -69,3 +71,6 @@ const FolderContent: QuartzComponent = ((opts?: Partial<FolderContentOptions>) =
     )
   }
 }) satisfies QuartzComponentConstructor
+
+FolderContent.css = style + PageList.css
+export default FolderContent

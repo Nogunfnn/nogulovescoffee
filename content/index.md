@@ -1,10 +1,7 @@
 ---
 title: NOGULOVESCOFFEE
 draft: false
-tags:
-  - coffee
-  - branding
-  - essay
+tags: []
 date:
 ---
 

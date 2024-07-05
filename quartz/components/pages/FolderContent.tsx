@@ -1,3 +1,4 @@
+// quartz/components/FolderContent.tsx (기존 파일 경로를 유지하세요)
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 import path from "path"
 

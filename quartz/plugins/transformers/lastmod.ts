@@ -6,12 +6,14 @@ import chalk from "chalk"
 
 export interface Options {
   priority: ("frontmatter" | "git" | "filesystem")[]
-  enableDates: boolean // 날짜 정보 사용 여부를 결정하는 옵션 추가
+  enableDates: boolean
+  maxTitleLength: number // 타이틀 길이 조절 옵션 추가
 }
 
 const defaultOptions: Options = {
   priority: ["frontmatter", "git", "filesystem"],
-  enableDates: false, // 기본값은 날짜 정보를 사용하도록 설정
+  enableDates: false,
+  maxTitleLength: 20, // 기본 타이틀 최대 길이 설정
 }
 
 function coerceDate(fp: string, d: any): Date {
@@ -28,6 +30,10 @@ function coerceDate(fp: string, d: any): Date {
   return invalidDate ? new Date() : dt
 }
 
+function truncateTitle(title: string, maxLength: number): string {
+  return title.length > maxLength ? title.slice(0, maxLength) + '...' : title;
+}
+
 type MaybeDate = undefined | string | number
 export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | undefined> = (
   userOpts,
@@ -41,7 +47,6 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
           let repo: Repository | undefined = undefined
           return async (_tree, file) => {
             if (!opts.enableDates) {
-              // 날짜 정보 사용이 비활성화된 경우 아무 작업도 수행하지 않음
               return;
             }
 
@@ -64,9 +69,6 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
                 published ||= file.data.frontmatter.publishDate as MaybeDate
               } else if (source === "git") {
                 if (!repo) {
-                  // Get a reference to the main git repo.
-                  // It's either the same as the workdir,
-                  // or 1+ level higher in case of a submodule/subtree setup
                   repo = Repository.discover(file.cwd)
                 }
 
@@ -88,6 +90,11 @@ export const CreatedModifiedDate: QuartzTransformerPlugin<Partial<Options> | und
               modified: coerceDate(fp, modified),
               published: coerceDate(fp, created),
             }
+
+            // 타이틀 텍스트 조절
+            if (file.data.title) {
+              file.data.title = truncateTitle(file.data.title, opts.maxTitleLength)
+            }
           }
         },
       ]
@@ -102,5 +109,6 @@ declare module "vfile" {
       modified: Date
       published: Date
     }
+    title?: string // 타이틀 속성 추가
   }
 }
